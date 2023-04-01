@@ -1,0 +1,7 @@
+.background img {
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  pointer-events: none;
+  filter: brightness(0.9);
+}

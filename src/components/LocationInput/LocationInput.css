@@ -1,0 +1,70 @@
+.locationContainer {
+  transform: translate(0%, 150%);
+}
+
+.cityNameDisplay {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  font-size: 3.25rem;
+}
+
+.searchTools {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin: 15px;
+  gap: 0.5rem;
+}
+
+.searchField {
+  width: 500px;
+  min-width: 225px;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background-color:rgba(255, 255, 255, 0.503);
+  padding: 20px;
+  outline: none;
+  font-size: x-large;
+  transition: border 0.2s ease-in-out,
+              background-color 0.2s ease-in-out, 
+              box-shadow 0.2s ease-in-out;
+  z-index: 1;
+}
+.searchField:hover,
+.searchField:focus {
+  background-color: rgba(255, 255, 255, 0.277);
+  box-shadow: 0px 2px 2px rgba(0,0,0,0.12), 
+              0px 4px 4px rgba(0,0,0,0.12), 
+              0px 12px 8px rgba(0,0,0,0.12);
+}
+
+.searchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  height: 50px;
+  width: 50px;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.503);
+  color: rgb(106, 106, 106);
+  transition: background-color 0.2s ease-in-out, 
+              transform 0.1s ease-in-out;;
+}
+.searchButton:hover,
+.searchButton:focus {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.277);
+}
+.searchButton:active {
+  transform: scale(0.85, 0.85);
+}
+.searchButton:not(:active) {
+  transform: scale(1, 1);
+}
