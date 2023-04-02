@@ -1,5 +1,5 @@
 import LocationInput from './components/LocationInput/LocationInput'
-import Background from './components/Background/Background'
+import Background from './components/HomeBackground/HomeBackground'
 
 import './App.css'
 
