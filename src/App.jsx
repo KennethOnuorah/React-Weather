@@ -1,13 +1,15 @@
-import LocationInput from './components/LocationInput/LocationInput'
-import Background from './components/HomeBackground/HomeBackground'
+import Search from './components/Search/Search'
+import HomeBackground from './components/HomeBackground/HomeBackground'
+import WeatherForecast from './components/WeatherForecast/WeatherForecast'
 
 import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <Background/>
-      <LocationInput/>
+      <HomeBackground/>
+      <Search/>
+      <WeatherForecast/>
     </div>
   )
 }
