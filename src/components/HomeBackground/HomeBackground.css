@@ -1,6 +1,7 @@
 .background {
   display: flex;
   justify-content: center;
+  transition: opacity 1s ease-in-out;
 }
 
 .background img {
@@ -10,14 +11,80 @@
   min-width: 1400px;
   pointer-events: none;
   filter: brightness(0.9);
-  transition: opacity 1s ease-in-out, transform 300ms ease;
+  transition: opacity 1s ease-in-out, 
+              transform 20s ease-in-out;
 }
 
-@keyframes zoom_image {
-  0%{
-    transform: scale(1, 1);
-  }
-  100%{
-    transform: scale(2, 2);
-  }
+.slide1{
+  animation: fade1 20s infinite;
+}
+.slide2{
+  animation: fade2 20s infinite;
+}
+.slide3{
+  animation: fade3 20s infinite;
+}
+.slide4{
+  animation: fade4 20s infinite;
+}
+.slide5{
+  animation: fade5 20s infinite;
+}
+.slide6{
+  animation: fade6 20s infinite;
+}
+
+@keyframes fade1 {
+  0%{opacity: 1;}
+  16.67%{opacity: 0;}
+  33.33%{opacity: 0;}
+  50.00%{opacity: 0;}
+  66.67%{opacity: 0;}
+  83.33%{opacity: 0;}
+  100%{opacity: 1;}
+}
+@keyframes fade2 {
+  0%{opacity: 0;}
+  16.67%{opacity: 1;}
+  33.33%{opacity: 0;}
+  50.00%{opacity: 0;}
+  66.67%{opacity: 0;}
+  83.33%{opacity: 0;}
+  100%{opacity: 0;}
+}
+@keyframes fade3 {
+  0%{opacity: 0;}
+  16.67%{opacity: 0;}
+  33.33%{opacity: 1;}
+  50.00%{opacity: 0;}
+  66.67%{opacity: 0;}
+  83.33%{opacity: 0;}
+  100%{opacity: 0;}
+}
+@keyframes fade4 {
+  0%{opacity: 0;}
+  16.67%{opacity: 0;}
+  33.33%{opacity: 0;}
+  50.00%{opacity: 1;}
+  66.67%{opacity: 0;}
+  83.33%{opacity: 0;}
+  100%{opacity: 0;}
+}
+@keyframes fade5 {
+  0%{opacity: 0;}
+  16.67%{opacity: 0;}
+  33.33%{opacity: 0;}
+  50.00%{opacity: 0;}
+  66.67%{opacity: 1;}
+  83.33%{opacity: 0;}
+  100%{opacity: 0;}
+}
+@keyframes fade6 {
+  0%{opacity: 0;}
+  16.67%{opacity: 0;}
+  33.33%{opacity: 0;}
+  50.00%{opacity: 0;}
+  66.67%{opacity: 0;}
+  83.33%{opacity: 1;}
+  100%{opacity: 0;}
 }

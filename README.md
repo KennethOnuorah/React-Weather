@@ -1,1 +1,1 @@
-A weather-reporting application created in React.js and Redux
+A weather-reporting CRUD application created w/ React.js, Redux, and Axios.js

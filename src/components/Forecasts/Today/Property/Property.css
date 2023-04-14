@@ -1,0 +1,14 @@
+.property{
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: large;
+}
+.property .propertyTitle{
+  font-size: x-large;
+}
+
+hr{
+  border: 0.25px solid rgba(255, 255, 255, 0.695);
+  border-radius: 50px;
+}
