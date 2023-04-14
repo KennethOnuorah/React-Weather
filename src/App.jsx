@@ -1,6 +1,7 @@
 import Search from './components/Search/Search'
 import HomeBackground from './components/HomeBackground/HomeBackground'
-import WeatherForecast from './components/WeatherForecast/WeatherForecast'
+import Forecasts from './components/Forecasts/Forecasts'
+import Quote from './components/Quote/Quote'
 
 import './App.css'
 
@@ -9,7 +10,10 @@ function App() {
     <div className="App">
       <HomeBackground/>
       <Search/>
-      <WeatherForecast/>
+      <div className='searchResults'>
+        <Forecasts/>
+        <Quote/>
+      </div>
     </div>
   )
 }
