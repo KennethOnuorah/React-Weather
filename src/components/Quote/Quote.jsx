@@ -1,12 +1,25 @@
+import { useSelector } from "react-redux"
 import "./Quote.css"
 
-const Quote = () => {
+const Quote = ({quote, name}) => {
+  const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
+
   return (
-    <article className="quoteSection">
+    <article 
+      className="quoteSection"
+      style={{
+        color: isForecastReceived ? "white" : "transparent"
+      }}
+    >
       Quote of the day
-      <caption className="quote">
-        "<em>Strive not to be a success, but to be of value</em>" - Albert Einstein
-      </caption>
+      <div 
+        className="quote"
+        style={{
+          display: isForecastReceived ? "block" : "none"
+        }}
+      >
+        "<em>{quote}</em>" - {name}
+      </div>
     </article>
   )
 }

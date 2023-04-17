@@ -1,17 +1,10 @@
-import { useSelector } from "react-redux"
+import "./Background.css"
 
-import "./HomeBackground.css"
-
-const HomeBackground = () => {
-  const isViewingResults = useSelector((state) => state.results.isViewingResults) 
-
+const Background = () => {
   return (
     <div 
       className="background" 
       draggable={"false"}
-      // style={{
-      //   opacity: isViewingResults ? "0.3" : "1"
-      // }}
     >
       <img className="slide1" src='/images/backgrounds/homescreen/forest.png'/>
       <img className="slide2" src='/images/backgrounds/homescreen/desert.png'/>
@@ -25,4 +18,4 @@ const HomeBackground = () => {
   )
 }
 
-export default HomeBackground
+export default Background

@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes, { number, string } from 'prop-types'
+import PropTypes from 'prop-types'
 
 import "./Property.css"
 
@@ -17,7 +17,7 @@ const Property = ({title, amount, unitType}) => {
 
 Property.propTypes = {
   title: PropTypes.string.isRequired,
-  amount: PropTypes.oneOf([number, string]).isRequired,
+  amount: PropTypes.any.isRequired,
   unitType: PropTypes.string.isRequired
 }
 

@@ -1,10 +1,12 @@
-import Today from './Today/Today'
+
+import Now from './Now/Now'
 import Week from './Week/Week'
 
 const Forecasts = () => {
+
   return (
     <>
-      <Today/>
+      <Now/>
       <Week/>
     </>
   )

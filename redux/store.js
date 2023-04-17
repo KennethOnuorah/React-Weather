@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit"
 import searchReducer from "./slices/search"
-import resultsReducer from "./slices/results"
+import forecastReducer from "./slices/forecast"
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
-    results: resultsReducer
+    forecast: forecastReducer
   }
 })

@@ -1,80 +1,87 @@
+import { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setSearchInput, setSearchQuery } from '../../../redux/slices/search'
-import { setIsViewingResults } from '../../../redux/slices/results'
+import { 
+  setSearchInput, 
+  clearSearchInput, 
+  setSearchQuery, 
+  clearSearchQuery,
+  setQuerySubmitted
+ } from '../../../redux/slices/search'
+import { setForecastReceived, setForecastData } from '../../../redux/slices/forecast'
 import { 
   HiOutlineMagnifyingGlass as SearchIcon,
   HiArrowLeft as BackIcon
 } from 'react-icons/hi2'
-import { TfiSave as SaveIcon } from 'react-icons/tfi'
 
 import './Search.css'
 
 const Search = () => {
   const dispatch = useDispatch()
   const searchInput = useSelector((state) => state.search.searchInput)
-  const isViewingResults = useSelector((state) => state.results.isViewingResults) 
-  
+  const isQuerySubmitted = useSelector((state) => state.search.isQuerySubmitted)
+  const searchFieldRef = useRef()
+
   return (
     <section
-      role='search' 
+      role="search"
       className="searchContainer"
       style={{
-        transform: isViewingResults ? "translate(0%, 0vh)" : "translate(0%, 30vh)",
+        transform: isQuerySubmitted
+          ? "translate(0%, 0vh)"
+          : "translate(0%, 30vh)",
       }}
     >
-      <div className='cityNameDisplay'>
-        {!isViewingResults && (searchInput !== "" ? searchInput : "Enter A U.S. city")}
+      <div className="cityNameDisplay">
+        {!isQuerySubmitted &&
+          (searchInput !== "" ? searchInput : "Enter a location")}
       </div>
-      <div className='searchTools'> 
+      <div className="searchTools">
         {
-        //in the long run, this should be replaced with the state bool "hasResults"
-        isViewingResults && 
-          <button 
-            className='backButton'
-            title='Back to home'
-            onClick={() => {
-              dispatch(setIsViewingResults(false))
-            }}
-          >
-            <BackIcon size={20}/>
-          </button>
+          //in the long run, this should be replaced with the state bool "hasResults"
+          isQuerySubmitted && (
+            <button
+              className="backButton"
+              title="Back to home"
+              onClick={() => {
+                dispatch(setQuerySubmitted(false))
+                dispatch(setForecastReceived(false))
+                dispatch(setForecastData({}))
+                dispatch(clearSearchQuery())
+                searchFieldRef.current.value = ""
+              }}
+            >
+              <BackIcon size={20} />
+            </button>
+          )
         }
-        <input 
-          className="searchField" 
-          type={"search"} 
-          placeholder='E.g. Houston, TX'
+        <input
+          className="searchField"
+          ref={searchFieldRef}
+          type={"search"}
+          placeholder="E.g. Houston, Texas or Paris, France"
           onInput={(e) => {
             dispatch(setSearchInput(e.target.value))
           }}
         />
-        {
-        !isViewingResults && 
-          <button 
-            className='saveQueryButton'
-            title='Save query'
-          >
-            <SaveIcon size={20}/>
-          </button>
-        }
-        {
-        isViewingResults && 
-          <button 
-            className='toggleTemperatureUnitButton'
-            title='Toggle temperature unit'
+        {isQuerySubmitted && (
+          <button
+            className="toggleTemperatureUnitButton"
+            title="Toggle temperature unit"
           >
             °F
           </button>
-        }
-        <button 
-          className='searchButton'
-          title='Find results'
+        )}
+        <button
+          className="searchButton"
+          title="Find results"
           onClick={() => {
-            if(searchInput === "") return
+            if (searchInput === "") return
+            dispatch(clearSearchInput())
             dispatch(setSearchQuery(searchInput))
-            dispatch(setIsViewingResults(true))
+            dispatch(setQuerySubmitted(true))
           }}
         >
-          <SearchIcon size={20}/>
+          <SearchIcon size={20} />
         </button>
       </div>
     </section>

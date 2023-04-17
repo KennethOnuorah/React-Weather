@@ -112,6 +112,11 @@ input[type="search"]::-webkit-search-results-decoration {
   transform: scale(1, 1);
 }
 
+@media screen and (max-width: 500px){
+  .cityNameDisplay{
+    font-size: calc(12px + 6vw);
+  }
+}
 @media screen and (max-width: 400px){
   .searchField{
     font-size: x-large;
