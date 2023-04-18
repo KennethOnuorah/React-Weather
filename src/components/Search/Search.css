@@ -22,7 +22,7 @@ input[type="search"]::-webkit-search-results-decoration {
   transform: translate(0%, 30vh);
   padding: 10px;
   overflow-x: hidden;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 9;
   top: 0;
 }

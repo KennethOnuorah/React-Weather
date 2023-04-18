@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  forecastData: {},
   isForecastReceived: false,
-  forecastData: {}
+  temperatureUnit: "fahrenheit",
 }
 
 export const forecastSlice = createSlice({
@@ -14,9 +15,12 @@ export const forecastSlice = createSlice({
     },
     setForecastData: (state, action) => {
       state.forecastData = {...action.payload}
+    },
+    toggleTemperatureUnit: (state) => {
+      state.temperatureUnit = state.temperatureUnit == "fahrenheit" ? "celsius" : "fahrenheit"
     }
   }
 })
 
-export const { setForecastReceived, setForecastData } = forecastSlice.actions
+export const { setForecastReceived, setForecastData, toggleTemperatureUnit } = forecastSlice.actions
 export default forecastSlice.reducer

@@ -10,7 +10,9 @@ const Property = ({title, amount, unitType}) => {
         {title}
       </div>
       <hr/>
-      {amount}{unitType}
+      <div className='propertyAmount'>
+        {amount}{unitType}
+      </div>
     </div>
   )
 }

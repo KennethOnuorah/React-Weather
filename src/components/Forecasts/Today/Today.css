@@ -1,4 +1,4 @@
-.weekContainer{
+.todayContainer{
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -13,21 +13,21 @@
               0px 2px 2px rgba(0,0,0,0.06), 
               0px 6px 4px rgba(0,0,0,0.06);
 }
-.weekContainer .forecastSummary{
+.todayContainer .forecastSummary{
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
   gap: 1rem;
 }
 
-@media screen and (max-width: 750px){
-  .weekContainer .forecastSummary{
-    grid-template-columns: auto auto;
+@media screen and (max-width: 1020px){
+  .todayContainer .forecastSummary{
+    grid-template-columns: auto auto auto;
   }
 }
 
-@media screen and (max-width: 435px){
-  .weekContainer .forecastSummary{
-    grid-template-columns: auto auto auto auto;
+@media screen and (max-width: 550px){
+  .todayContainer .forecastSummary{
+    grid-template-columns: auto auto auto auto auto auto;
     overflow-x: scroll;
   }
 }

@@ -7,18 +7,15 @@ import {
   clearSearchQuery,
   setQuerySubmitted
  } from '../../../redux/slices/search'
-import { setForecastReceived, setForecastData } from '../../../redux/slices/forecast'
-import { 
-  HiOutlineMagnifyingGlass as SearchIcon,
-  HiArrowLeft as BackIcon
-} from 'react-icons/hi2'
+import { setForecastReceived, setForecastData, toggleTemperatureUnit } from '../../../redux/slices/forecast'
+import { HiOutlineMagnifyingGlass as SearchIcon, HiArrowLeft as BackIcon } from 'react-icons/hi2'
 
 import './Search.css'
 
 const Search = () => {
   const dispatch = useDispatch()
-  const searchInput = useSelector((state) => state.search.searchInput)
-  const isQuerySubmitted = useSelector((state) => state.search.isQuerySubmitted)
+  const search = useSelector(state => state.search)
+  const forecast = useSelector(state => state.forecast)
   const searchFieldRef = useRef()
 
   return (
@@ -26,58 +23,61 @@ const Search = () => {
       role="search"
       className="searchContainer"
       style={{
-        transform: isQuerySubmitted
-          ? "translate(0%, 0vh)"
-          : "translate(0%, 30vh)",
+        transform: search.isQuerySubmitted ? "translate(0%, 0vh)" : "translate(0%, 30vh)",
       }}
     >
       <div className="cityNameDisplay">
-        {!isQuerySubmitted &&
-          (searchInput !== "" ? searchInput : "Enter a location")}
+        {!search.isQuerySubmitted && (search.searchInput !== "" ? search.searchInput : "Enter a location")}
       </div>
       <div className="searchTools">
-        {
-          //in the long run, this should be replaced with the state bool "hasResults"
-          isQuerySubmitted && (
-            <button
-              className="backButton"
-              title="Back to home"
-              onClick={() => {
-                dispatch(setQuerySubmitted(false))
-                dispatch(setForecastReceived(false))
-                dispatch(setForecastData({}))
-                dispatch(clearSearchQuery())
-                searchFieldRef.current.value = ""
-              }}
-            >
-              <BackIcon size={20} />
-            </button>
-          )
-        }
+        {search.isQuerySubmitted && (
+          <button
+            className="backButton"
+            title="Back to home"
+            onClick={() => {
+              if(!forecast.isForecastReceived) return
+              dispatch(setQuerySubmitted(false))
+              dispatch(setForecastReceived(false))
+              dispatch(setForecastData({}))
+              dispatch(clearSearchQuery())
+              searchFieldRef.current.value = ""
+            }}
+          >
+            <BackIcon size={20} />
+          </button>
+        )}
         <input
           className="searchField"
           ref={searchFieldRef}
           type={"search"}
           placeholder="E.g. Houston, Texas or Paris, France"
+          onKeyDown={(e) => {
+            if(e.key == "Enter" && search.searchInput !== ""){
+              dispatch(clearSearchInput())
+              dispatch(setSearchQuery(search.searchInput))
+              dispatch(setQuerySubmitted(true))
+            }
+          }}
           onInput={(e) => {
             dispatch(setSearchInput(e.target.value))
           }}
         />
-        {isQuerySubmitted && (
+        {search.isQuerySubmitted && (
           <button
             className="toggleTemperatureUnitButton"
             title="Toggle temperature unit"
+            onClick={() => dispatch(toggleTemperatureUnit())}
           >
-            °F
+            {forecast.temperatureUnit == "fahrenheit" ? "°F" : "°C"}
           </button>
         )}
         <button
           className="searchButton"
           title="Find results"
           onClick={() => {
-            if (searchInput === "") return
+            if (search.searchInput === "") return
             dispatch(clearSearchInput())
-            dispatch(setSearchQuery(searchInput))
+            dispatch(setSearchQuery(search.searchInput))
             dispatch(setQuerySubmitted(true))
           }}
         >
