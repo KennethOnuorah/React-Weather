@@ -1,17 +1,30 @@
+import { useSelector } from "react-redux"
 import DayCard from "./DayCard/DayCard"
 import { WiDaySunny as SunnyIcon } from 'react-icons/wi'
 
 import "./Week.css"
 
 const Week = () => {
+  const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
+  
   return (
-    <article className="week">
+    <article 
+      className="weekContainer"
+      style={{
+        color: isForecastReceived ? "white" : "transparent"
+      }}
+    >
       Your forecast for the next several days.
-      <div className="dayCards">
-        <DayCard dayName="Tuesday" temperature={78} weatherIcon={<SunnyIcon size={100}/>}/>
-        <DayCard dayName="Wednesday" temperature={84} weatherIcon={<SunnyIcon size={100}/>}/>
-        <DayCard dayName="Thursday" temperature={87} weatherIcon={<SunnyIcon size={100}/>}/>
-        <DayCard dayName="Friday" temperature={88} weatherIcon={<SunnyIcon size={100}/>}/>
+      <div 
+        className="forecastSummary"
+        style={{
+          display: isForecastReceived ? "grid" : "none"
+        }}
+      >
+        <DayCard dayName="Tuesday" temperature={0} weatherIcon={<SunnyIcon size={100}/>}/>
+        <DayCard dayName="Wednesday" temperature={0} weatherIcon={<SunnyIcon size={100}/>}/>
+        <DayCard dayName="Thursday" temperature={0} weatherIcon={<SunnyIcon size={100}/>}/>
+        <DayCard dayName="Friday" temperature={0} weatherIcon={<SunnyIcon size={100}/>}/>
       </div>
     </article>
   )
