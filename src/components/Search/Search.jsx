@@ -7,7 +7,8 @@ import {
   clearSearchQuery,
   setQuerySubmitted
 } from '../../../redux/slices/search'
-import { setForecastReceived, setForecastData, toggleTemperatureUnit } from '../../../redux/slices/forecast'
+import { toggleTemperatureUnit } from '../../../redux/slices/search'
+import { setForecastReceived, setForecastData } from '../../../redux/slices/forecast'
 import { HiOutlineMagnifyingGlass as SearchIcon, HiArrowLeft as BackIcon } from 'react-icons/hi2'
 
 import './Search.css'
@@ -16,6 +17,7 @@ const Search = () => {
   const dispatch = useDispatch()
   const search = useSelector(state => state.search)
   const forecast = useSelector(state => state.forecast)
+  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const searchFieldRef = useRef()
 
   const defocusSearchField = () => {
@@ -73,7 +75,7 @@ const Search = () => {
             title="Toggle temperature unit"
             onClick={() => dispatch(toggleTemperatureUnit())}
           >
-            {forecast.temperatureUnit == "fahrenheit" ? "°F" : "°C"}
+            {temperatureUnit == "fahrenheit" ? "°F" : "°C"}
           </button>
         )}
         <button

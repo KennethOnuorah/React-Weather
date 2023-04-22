@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   searchInput: "",
   searchQuery: "",
-  isQuerySubmitted: false
+  isQuerySubmitted: false,
+  temperatureUnit: "fahrenheit",
 }
 
 export const searchSlice = createSlice({
@@ -24,7 +25,10 @@ export const searchSlice = createSlice({
     },
     setQuerySubmitted: (state, action) => {
       state.isQuerySubmitted = action.payload
-    }
+    },
+    toggleTemperatureUnit: (state) => {
+      state.temperatureUnit = state.temperatureUnit == "fahrenheit" ? "celsius" : "fahrenheit"
+    },
   }
 })
 
@@ -33,6 +37,7 @@ export const {
   clearSearchInput, 
   setSearchQuery,
   clearSearchQuery,
-  setQuerySubmitted 
+  setQuerySubmitted,
+  toggleTemperatureUnit
 } = searchSlice.actions
 export default searchSlice.reducer

@@ -18,7 +18,7 @@ import "./Now.css"
 const Now = () => {
   
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
-  const temperatureUnit = useSelector(state => state.forecast.temperatureUnit)
+  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const forecastData = useSelector(state => state.forecast.forecastData)
   const weatherCodeKey = Object.keys(weatherCodes).filter(k => k.split(',').map(Number).includes(forecastData.current_weather?.weathercode))
 

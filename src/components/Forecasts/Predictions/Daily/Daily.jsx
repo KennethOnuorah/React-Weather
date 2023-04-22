@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import { useUpdateEffect } from "react-use"
 import { useSelector, useDispatch } from "react-redux"
 
@@ -10,13 +11,15 @@ import "./Daily.css"
 
 const Daily = () => {
   const dispatch = useDispatch()
+  const summaryRef = useRef()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
   const forecastData = useSelector(state => state.forecast.forecastData)
-  const temperatureUnit = useSelector(state => state.forecast.temperatureUnit)
+  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const predictions = useSelector(state => state.forecast.dailyPredictions)
 
   useUpdateEffect(() => {
     if(!isForecastReceived) return
+    summaryRef.current.scrollLeft = 0
     dispatch(setDailyPredictions(getDailyPredictions(
       forecastData.daily.time,
       forecastData.daily.temperature_2m_max,
@@ -34,11 +37,12 @@ const Daily = () => {
       Your forecast for the next several days.
       <div 
         className="predictionSummary"
+        ref={summaryRef}
         style={{
           display: isForecastReceived ? "grid" : "none"
         }}
       >
-        {predictions.map((p) => 
+        {predictions.filter((p) => predictions.indexOf(p) !== 0).map((p) => 
           <Prediction 
             key={predictions.indexOf(p)+p.time}
             time={p.time} 
