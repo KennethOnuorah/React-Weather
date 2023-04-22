@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   forecastData: {},
+  hourlyPredictions: [],
+  dailyPredictions: [],
   isForecastReceived: false,
   temperatureUnit: "fahrenheit",
 }
@@ -18,9 +20,21 @@ export const forecastSlice = createSlice({
     },
     toggleTemperatureUnit: (state) => {
       state.temperatureUnit = state.temperatureUnit == "fahrenheit" ? "celsius" : "fahrenheit"
+    },
+    setHourlyPredictions: (state, action) => {
+      state.hourlyPredictions = [...action.payload]
+    },
+    setDailyPredictions: (state, action) => {
+      state.dailyPredictions = [...action.payload]
     }
   }
 })
 
-export const { setForecastReceived, setForecastData, toggleTemperatureUnit } = forecastSlice.actions
+export const { 
+  setForecastReceived, 
+  setForecastData, 
+  toggleTemperatureUnit, 
+  setHourlyPredictions,
+  setDailyPredictions
+} = forecastSlice.actions
 export default forecastSlice.reducer

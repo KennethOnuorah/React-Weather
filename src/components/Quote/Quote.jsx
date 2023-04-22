@@ -1,26 +1,18 @@
 import { useSelector } from "react-redux"
 import "./Quote.css"
 
-const Quote = ({quote, name}) => {
-  const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
+const Quote = ({quote, person}) => {
+  const isQuerySubmitted = useSelector(state => state.search.isQuerySubmitted)
 
   return (
-    <article 
-      className="quoteSection"
+    <div 
+      className="quote"
       style={{
-        color: isForecastReceived ? "white" : "transparent"
+        display: isQuerySubmitted ? "none" : "block"
       }}
     >
-      Quote of the day
-      <div 
-        className="quote"
-        style={{
-          display: isForecastReceived ? "block" : "none"
-        }}
-      >
-        "<em>{quote}</em>" - {name}
-      </div>
-    </article>
+      <em>{`"${quote}"`}</em>{person ? ` - ${person}` : ''}
+    </div>
   )
 }
 

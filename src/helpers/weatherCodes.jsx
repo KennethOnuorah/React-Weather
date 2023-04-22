@@ -6,10 +6,15 @@ const weatherCodes = {
     dayIcon: <Icons.WiDaySunny size={100}/>,
     nightIcon: <Icons.WiNightClear size={100}/>
   },
-  "2, 3": {
-    type: "Cloudy skies",
+  "2": {
+    type: "Partly cloudy",
     dayIcon: <Icons.WiDayCloudy size={100}/>,
     nightIcon: <Icons.WiNightAltCloudy size={100}/>
+  },
+  "3": {
+    type: "Cloudy",
+    dayIcon: <Icons.WiCloudy size={100}/>,
+    nightIcon: <Icons.WiCloudy size={100}/>
   },
   "45, 48": {
     type: "Foggy weather",
@@ -23,8 +28,8 @@ const weatherCodes = {
   },
   "61, 63, 65, 66, 67, 80, 81, 82": {
     type: "Rainy weather",
-    dayIcon: <Icons.WiDayRain size={100}/>,
-    nightIcon: <Icons.WiNightAltRain size={100}/>
+    dayIcon: <Icons.WiRain size={100}/>,
+    nightIcon: <Icons.WiRain size={100}/>
   },
   "71, 73, 75, 77, 85, 86": {
     type: "Snowy weather",
@@ -33,8 +38,8 @@ const weatherCodes = {
   },
   "95, 96, 99": {
     type: "Thunderstorms",
-    dayIcon: <Icons.WiDayThunderstorm size={100}/>,
-    nightIcon: <Icons.WiNightThunderstorm size={100}/>
+    dayIcon: <Icons.WiThunderstorm size={100}/>,
+    nightIcon: <Icons.WiThunderstorm size={100}/>
   },
 }
 

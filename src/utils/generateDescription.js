@@ -1,12 +1,12 @@
 const conjunctions = ["and", "along with", "as well as"]
 const hotPrepositions = ["of", "at", "at about", "of up to", "at around"]
-const coldPrepositions = ["of", "at", "as low as", "down at", "dropping at"]
+const coldPrepositions = ["of", "at", "as low as", "down at"]
 
-const freezingAdjectives = ["freezing", "frozen", "subzero"]
-const coldAdjectives = ["cold", "chilling", "crisp"]
+const freezingAdjectives = ["freezing", "frozen", "chilling"]
+const coldAdjectives = ["cold", "crisp"]
 const mildAdjectives = ["mild", "moderate", "cool"]
 const warmAdjectives = ["warm", "hot"]
-const hotAdjectives = ["very hot", "scorching", "burning"]
+const hotAdjectives = ["very hot", "scorching"]
 
 const getTemperatureAdjective = (temp, tempUnit) => {
   if(tempUnit === "celsius"){
@@ -43,13 +43,14 @@ const getTemperatureAdjective = (temp, tempUnit) => {
 }
 
 const generateWeatherDescription = (weatherType, temp, tempUnit, windSpeed, precipProb) => {
-  return `
-    ${weatherType} 
+  return `${weatherType} 
     ${conjunctions[Math.floor(Math.random() * conjunctions.length)]} 
     ${getTemperatureAdjective(temp, tempUnit)} temperatures 
-    ${(temp <= 50 && tempUnit == "fahrenheit" || temp <= 23 && tempUnit == "celsius") ? coldPrepositions[Math.floor(Math.random() * coldPrepositions.length)] : hotPrepositions[Math.floor(Math.random() * hotPrepositions.length)]} 
-    ${Math.round(temp)}${tempUnit == "fahrenheit" ? "°F" : "°C"} with winds traveling at ${Math.round(windSpeed)} mph
-    ${precipProb > 0 ? " and " + precipProb + "% chance of precipitation" : ""}`
+    ${tempUnit == "fahrenheit" ?
+        (temp < 40 ? coldPrepositions[Math.floor(Math.random() * coldPrepositions.length)] : hotPrepositions[Math.floor(Math.random() * hotPrepositions.length)]) :
+        (temp < 13 ? coldPrepositions[Math.floor(Math.random() * coldPrepositions.length)] : hotPrepositions[Math.floor(Math.random() * hotPrepositions.length)])}     
+    ${Math.round(temp)}${tempUnit == "fahrenheit" ? "°F" : "°C"}, with winds traveling at ${Math.round(windSpeed)} mph${precipProb > 0 ? " and a " + precipProb + "% chance of precipitation." : "."}`
+    
 }
 
 export { generateWeatherDescription }
