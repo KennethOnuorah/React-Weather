@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setForecastData, setForecastReceived } from '../redux/slices/forecast'
 import { setQuote } from '../redux/slices/quote'
 
-import { GEOCODE_BASE_URL, FORECAST_BASE_URL, apiForecastParams } from './helpers/baseURLs'
+import { GEOCODE_BASE_URL, FORECAST_BASE_URL, forecastURLParams } from './helpers/baseURLs'
 
 import Search from './components/Search/Search'
 import Background from './components/Background/Background'
@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch()
   const locationSearch = useSelector(state => state.search.searchQuery)
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
-  const temperatureUnit = useSelector(state => state.forecast.temperatureUnit)
+  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const quote = useSelector(state => state.quote.quote)
 
   useUpdateEffect(() => {
@@ -27,7 +27,7 @@ function App() {
       dispatch(setForecastReceived(false))
       const geolocation = await axios.get(`${GEOCODE_BASE_URL}${locationSearch}`)
       const [lat, lon] = [geolocation.data[0].lat, geolocation.data[0].lon]
-      const forecast = await axios.get(`${FORECAST_BASE_URL}${apiForecastParams(lat, lon, temperatureUnit)}`)
+      const forecast = await axios.get(`${FORECAST_BASE_URL}${forecastURLParams(lat, lon, temperatureUnit)}`)
       dispatch(setForecastReceived(true))
       dispatch(setForecastData(forecast.data))
       console.log(forecast.data)

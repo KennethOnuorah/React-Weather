@@ -1,7 +1,8 @@
-.background .home, .background .forecast {
+.background .home, 
+.background .forecast {
   display: flex;
   justify-content: center;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);;
 }
 
 .background img, .background .forecast img {
@@ -87,8 +88,4 @@
   66.67%{opacity: 0;}
   83.33%{opacity: 1;}
   100%{opacity: 0;}
-}
-
-@keyframes showResults {
-  
 }

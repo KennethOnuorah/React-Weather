@@ -12,7 +12,7 @@ const Hourly = () => {
   const dispatch = useDispatch()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
   const forecastData = useSelector(state => state.forecast.forecastData)
-  const temperatureUnit = useSelector(state => state.forecast.temperatureUnit)
+  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const predictions = useSelector(state => state.forecast.hourlyPredictions)
 
   useUpdateEffect(() => {

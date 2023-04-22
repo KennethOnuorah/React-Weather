@@ -1,12 +1,22 @@
-import { useSelector } from "react-redux"
+import { useUpdateEffect } from "react-use"
+import { useSelector, useDispatch } from "react-redux"
+
+import { setBackground } from "../../../redux/slices/forecast"
 import { weatherCodes } from "../../helpers/weatherCodes"
 
 import "./Background.css"
 
 const Background = () => {
+  const dispatch = useDispatch()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
   const forecastData = useSelector(state => state.forecast.forecastData)
+  const background = useSelector(state => state.forecast.background)
   const weatherCodeKey = Object.keys(weatherCodes).filter(k => k.split(',').map(Number).includes(forecastData.current_weather?.weathercode))
+
+  useUpdateEffect(() => {
+    if(!isForecastReceived) return
+    dispatch(setBackground(weatherCodes[weatherCodeKey[0]]?.background))
+  }, [isForecastReceived])
 
   return (
     <div 
@@ -17,6 +27,7 @@ const Background = () => {
         className="home"
         style={{
           opacity: isForecastReceived ? 0 : 1,
+          // opacity: 0
         }}
       >
         <img className="slide1" src='/images/backgrounds/homescreen/forest.png'/>
@@ -34,7 +45,8 @@ const Background = () => {
           opacity: isForecastReceived ? 1 : 0
         }}
       >
-        <img className="resultsSlide" src={weatherCodes[weatherCodeKey[0]]?.background} style={{
+        {/* The reason why the opacity doesn't decrease smoothly is because when you press the back button, the source for the image gets removed. */}
+        <img className="resultsSlide" src={background} style={{
           filter: "brightness(0.6)"
         }}/>
       </div>

@@ -12,7 +12,7 @@ const Daily = () => {
   const dispatch = useDispatch()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
   const forecastData = useSelector(state => state.forecast.forecastData)
-  const temperatureUnit = useSelector(state => state.forecast.temperatureUnit)
+  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const predictions = useSelector(state => state.forecast.dailyPredictions)
 
   useUpdateEffect(() => {
@@ -38,7 +38,7 @@ const Daily = () => {
           display: isForecastReceived ? "grid" : "none"
         }}
       >
-        {predictions.map((p) => 
+        {predictions.filter((p) => predictions.indexOf(p) !== 0).map((p) => 
           <Prediction 
             key={predictions.indexOf(p)+p.time}
             time={p.time} 

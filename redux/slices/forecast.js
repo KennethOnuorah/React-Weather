@@ -5,7 +5,7 @@ const initialState = {
   hourlyPredictions: [],
   dailyPredictions: [],
   isForecastReceived: false,
-  temperatureUnit: "fahrenheit",
+  background: "",
 }
 
 export const forecastSlice = createSlice({
@@ -18,14 +18,14 @@ export const forecastSlice = createSlice({
     setForecastData: (state, action) => {
       state.forecastData = {...action.payload}
     },
-    toggleTemperatureUnit: (state) => {
-      state.temperatureUnit = state.temperatureUnit == "fahrenheit" ? "celsius" : "fahrenheit"
-    },
     setHourlyPredictions: (state, action) => {
       state.hourlyPredictions = [...action.payload]
     },
     setDailyPredictions: (state, action) => {
       state.dailyPredictions = [...action.payload]
+    },
+    setBackground: (state, action) => {
+      state.background = action.payload
     }
   }
 })
@@ -33,8 +33,8 @@ export const forecastSlice = createSlice({
 export const { 
   setForecastReceived, 
   setForecastData, 
-  toggleTemperatureUnit, 
   setHourlyPredictions,
-  setDailyPredictions
+  setDailyPredictions,
+  setBackground
 } = forecastSlice.actions
 export default forecastSlice.reducer
