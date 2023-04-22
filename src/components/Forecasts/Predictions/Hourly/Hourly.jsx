@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useUpdateEffect } from 'react-use'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -10,6 +11,7 @@ import "./Hourly.css"
 
 const Hourly = () => {
   const dispatch = useDispatch()
+  const summaryRef = useRef()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
   const forecastData = useSelector(state => state.forecast.forecastData)
   const temperatureUnit = useSelector(state => state.search.temperatureUnit)
@@ -17,6 +19,7 @@ const Hourly = () => {
 
   useUpdateEffect(() => {
     if(!isForecastReceived) return
+    summaryRef.current.scrollLeft = 0
     dispatch(setHourlyPredictions(getHourlyPredictions(
       forecastData.hourly.time.indexOf(forecastData.current_weather.time),
       forecastData.hourly.time,
@@ -35,6 +38,7 @@ const Hourly = () => {
       Your forecast for the rest of the day.
       <div
         className="predictionSummary"
+        ref={summaryRef}
         style={{
           display: isForecastReceived ? "grid" : "none",
         }}
