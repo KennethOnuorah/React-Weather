@@ -1,15 +1,14 @@
-
 import Now from './Now/Now'
-import Today from './Today/Today'
-import Week from './Week/Week'
+import Hourly from './Predictions/Hourly/Hourly'
+import Daily from './Predictions/Daily/Daily'
 
 const Forecasts = () => {
 
   return (
     <>
       <Now/>
-      <Today/>
-      <Week/>
+      <Hourly/>
+      <Daily/>
     </>
   )
 }

@@ -3,9 +3,12 @@ import PropTypes from 'prop-types'
 
 import "./Property.css"
 
-const Property = ({title, amount, unitType}) => {
+const Property = ({title, amount, unitType, icon}) => {
   return (
     <div className="property">
+      <div className="propertyIcon">
+        {icon}
+      </div>
       <div className='propertyTitle'>
         {title}
       </div>
@@ -20,7 +23,8 @@ const Property = ({title, amount, unitType}) => {
 Property.propTypes = {
   title: PropTypes.string.isRequired,
   amount: PropTypes.any.isRequired,
-  unitType: PropTypes.string.isRequired
+  unitType: PropTypes.string.isRequired,
+  icon: PropTypes.element.isRequired
 }
 
 export default Property
