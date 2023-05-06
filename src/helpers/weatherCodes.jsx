@@ -47,7 +47,7 @@ const weatherCodes = {
     type: "Thunderstorms",
     dayIcon: <Icons.WiThunderstorm size={100}/>,
     nightIcon: <Icons.WiThunderstorm size={100}/>,
-    background: "/images/backgrounds/forecasts/thunder.png",
+    background: "/images/backgrounds/forecasts/thunderstorms.png",
   },
 }
 

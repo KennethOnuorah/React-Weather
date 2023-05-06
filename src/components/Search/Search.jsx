@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { 
   setSearchInput, 
@@ -14,14 +15,16 @@ import { HiOutlineMagnifyingGlass as SearchIcon, HiArrowLeft as BackIcon } from 
 import './Search.css'
 
 const Search = () => {
+  const [searchParams,] = useSearchParams()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const search = useSelector(state => state.search)
   const forecast = useSelector(state => state.forecast)
   const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const searchFieldRef = useRef()
 
-  const defocusSearchField = () => {
-    searchFieldRef.current.blur()
+  const removeFocus = (ref) => {
+    ref.current.blur()
   }
 
   return (
@@ -29,14 +32,14 @@ const Search = () => {
       role="search"
       className="searchContainer"
       style={{
-        transform: search.isQuerySubmitted ? "translate(0%, 0vh)" : "translate(0%, 30vh)",
+        transform: (search.isQuerySubmitted || searchParams.get("q")) ? "translate(0%, 0vh)" : "translate(0%, 30vh)",
       }}
     >
       <div className="cityNameDisplay">
-        {!search.isQuerySubmitted && (search.searchInput !== "" ? search.searchInput : "Enter a location")}
+        {!searchParams.get("q") && (search.searchInput !== "" ? search.searchInput : "Enter a location")}
       </div>
       <div className="searchTools">
-        {search.isQuerySubmitted && (
+        {(search.isQuerySubmitted || searchParams.get("q")) && (
           <button
             className="backButton"
             title="Back to home"
@@ -46,6 +49,7 @@ const Search = () => {
               dispatch(setForecastReceived(false))
               dispatch(setForecastData({}))
               dispatch(clearSearchQuery())
+              navigate('/')
               searchFieldRef.current.value = ""
             }}
           >
@@ -62,14 +66,15 @@ const Search = () => {
               dispatch(clearSearchInput())
               dispatch(setSearchQuery(search.searchInput))
               dispatch(setQuerySubmitted(true))
-              defocusSearchField()
+              navigate(`/search?q=${search.searchInput}&unit=${temperatureUnit}`)
+              removeFocus(searchFieldRef)
             }
           }}
           onInput={(e) => {
             dispatch(setSearchInput(e.target.value))
           }}
         />
-        {!search.isQuerySubmitted && (
+        {(!search.isQuerySubmitted && !searchParams.get("q")) && (
           <button
             className="toggleTemperatureUnitButton"
             title="Toggle temperature unit"
@@ -86,11 +91,13 @@ const Search = () => {
             dispatch(clearSearchInput())
             dispatch(setSearchQuery(search.searchInput))
             dispatch(setQuerySubmitted(true))
+            navigate(`/search?q=${search.searchInput}&unit=${temperatureUnit}`)
           }}
         >
           <SearchIcon size={20} />
         </button>
       </div>
+      <Outlet/>
     </section>
   )
 }
