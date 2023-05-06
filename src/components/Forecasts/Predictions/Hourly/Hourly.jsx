@@ -35,7 +35,7 @@ const Hourly = () => {
         color: isForecastReceived ? "white" : "transparent",
       }}
     >
-      Your forecast for the rest of the day.
+      Your forecast for the rest of today.
       <div
         className="predictionSummary"
         ref={summaryRef}
