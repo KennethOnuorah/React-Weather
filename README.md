@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/images/readme/react_weather_readme_logo.png" width="339" height="342">
+  <img src="public/images/readme/react_weather_readme_logo.png" width="309" height="312">
 </p>
 
 <p align="center">
@@ -22,7 +22,12 @@ Modules/Libraries used:
 2. [Redux & Redux Toolkit](https://github.com/reduxjs/redux)
 3. [React Router v6](https://github.com/remix-run/react-router)
 
-**Project development**: 3/29/2023 - 5/9/2023
+API's used:
+
+1. [Open-Meteo](https://open-meteo.com/)
+2. [Type.fit](https://type.fit/api/quotes)
+
+**Project development**: 3/29/2023 - 5/10/2023
 
 ## **Features** 📦️
 - [x] Location search bar
