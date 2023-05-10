@@ -7,6 +7,7 @@ import Search from './components/Search/Search'
 import Background from './components/Background/Background'
 import Forecasts from './components/Forecasts/Forecasts'
 import Quote from './components/Quote/Quote'
+import PageNotFound from './components/PageNotFound/PageNotFound'
 
 import './App.css'
 
@@ -20,7 +21,12 @@ function App() {
   const routes = useRoutes([
     {
       path: "/",
-      element: <Search/>,
+      element: (
+        <>
+          <Search/>
+          <Quote text={quote.text} author={quote.author}/>
+        </>
+      ),
       children: [
         { 
           path: `search`,
@@ -29,6 +35,7 @@ function App() {
               className="searchResults"
               style={{
                 animation: isForecastReceived ? "openResults 0.3s forwards" : "closeResults 0.3s forwards",
+                visibility: isForecastReceived ? "visible" : "hidden"
               }}
             >
               <Forecasts/>
@@ -36,14 +43,17 @@ function App() {
           )
         }
       ]
-    }
+    },
+    {
+      path: "*",
+      element: <PageNotFound/>,
+    },
   ])
 
   return (
     <div className="App">
       <Background/>
       {routes}
-      <Quote text={quote.text} author={quote.author}/>
     </div>
   )
 }

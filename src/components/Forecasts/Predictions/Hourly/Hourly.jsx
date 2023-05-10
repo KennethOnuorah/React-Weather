@@ -1,5 +1,5 @@
-import { useRef } from 'react'
-import { useUpdateEffect } from 'react-use'
+import { useEffect, useRef } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setHourlyPredictions } from '../../../../../redux/slices/forecast'
@@ -12,12 +12,14 @@ import "./Hourly.css"
 const Hourly = () => {
   const dispatch = useDispatch()
   const summaryRef = useRef()
+  const [searchParams,] = useSearchParams()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
   const forecastData = useSelector(state => state.forecast.forecastData)
-  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
+  const forecastDataEntriesLength = Object.entries(forecastData).length
+  const temperatureUnit = searchParams.get("unit")
   const predictions = useSelector(state => state.forecast.hourlyPredictions)
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     if(!isForecastReceived) return
     summaryRef.current.scrollLeft = 0
     dispatch(setHourlyPredictions(getHourlyPredictions(
@@ -26,7 +28,7 @@ const Hourly = () => {
       forecastData.hourly.temperature_2m,
       forecastData.hourly.weathercode
     )))
-  }, [isForecastReceived])
+  }, [isForecastReceived, forecastDataEntriesLength])
 
   return (
     <article
