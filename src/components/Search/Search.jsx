@@ -10,6 +10,9 @@ import {
 } from '../../../redux/slices/search'
 import { toggleTemperatureUnit } from '../../../redux/slices/search'
 import { setForecastReceived, setForecastData } from '../../../redux/slices/forecast'
+
+import useViewportDimensions from '../../hooks/useViewportDimensions'
+
 import { HiOutlineMagnifyingGlass as SearchIcon, HiArrowLeft as BackIcon } from 'react-icons/hi2'
 
 import './Search.css'
@@ -22,6 +25,7 @@ const Search = () => {
   const forecast = useSelector(state => state.forecast)
   const temperatureUnit = useSelector(state => state.search.temperatureUnit)
   const searchFieldRef = useRef()
+  const viewport = useViewportDimensions()
 
   const removeFocus = (ref) => {
     ref.current.blur()
@@ -60,7 +64,7 @@ const Search = () => {
           className="searchField"
           ref={searchFieldRef}
           type={"search"}
-          placeholder="E.g. Houston, Texas or Paris, France"
+          placeholder={viewport.width >= 500 ? "E.g. Houston, Texas or Paris, France" : "E.g. Houston, Texas"}
           onKeyDown={(e) => {
             if(e.key == "Enter" && search.searchInput !== ""){
               dispatch(clearSearchInput())
