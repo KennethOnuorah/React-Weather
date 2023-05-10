@@ -1,5 +1,5 @@
-import { useRef } from "react"
-import { useUpdateEffect } from "react-use"
+import { useEffect, useRef } from "react"
+import { useSearchParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 import { setDailyPredictions } from "../../../../../redux/slices/forecast"
@@ -12,12 +12,14 @@ import "./Daily.css"
 const Daily = () => {
   const dispatch = useDispatch()
   const summaryRef = useRef()
+  const [searchParams,] = useSearchParams()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
   const forecastData = useSelector(state => state.forecast.forecastData)
-  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
+  const forecastDataEntriesLength = Object.entries(forecastData).length
+  const temperatureUnit = searchParams.get("unit")
   const predictions = useSelector(state => state.forecast.dailyPredictions)
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     if(!isForecastReceived) return
     summaryRef.current.scrollLeft = 0
     dispatch(setDailyPredictions(getDailyPredictions(
@@ -25,7 +27,7 @@ const Daily = () => {
       forecastData.daily.temperature_2m_max,
       forecastData.daily.weathercode
     )))
-  }, [isForecastReceived])
+  }, [isForecastReceived, forecastDataEntriesLength])
 
   return (
     <article 

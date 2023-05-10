@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux'
+import { useSearchParams } from 'react-router-dom'
 import Property from './Property/Property'
 
 import * as deg2dir from 'degrees-to-direction'
@@ -16,9 +17,9 @@ import { TbUvIndex as UVIcon } from 'react-icons/tb'
 import "./Now.css"
 
 const Now = () => {
-  
+  const [searchParams,] = useSearchParams()
   const isForecastReceived = useSelector(state => state.forecast.isForecastReceived)
-  const temperatureUnit = useSelector(state => state.search.temperatureUnit)
+  const temperatureUnit = searchParams.get("unit")
   const forecastData = useSelector(state => state.forecast.forecastData)
   const weatherCodeKey = Object.keys(weatherCodes).filter(k => k.split(',').map(Number).includes(forecastData.current_weather?.weathercode))
 

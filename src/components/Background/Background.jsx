@@ -15,19 +15,19 @@ const Background = () => {
 
   useUpdateEffect(() => {
     if(!isForecastReceived) return
-    dispatch(setBackground(weatherCodes[weatherCodeKey[0]]?.background))
-  }, [isForecastReceived])
+    if(Object.keys(forecastData).length > 0){
+      dispatch(setBackground(weatherCodes[weatherCodeKey[0]]?.background))
+    }else{
+      dispatch(setBackground('/images/backgrounds/notfound.png'))
+    }
+  }, [isForecastReceived, forecastData])
 
   return (
-    <div 
-      className="background" 
-      draggable={"false"}
-    >
+    <div className="background" draggable="false">
       <div 
         className="home"
         style={{
           opacity: isForecastReceived ? 0 : 1,
-          // opacity: 0
         }}
       >
         <img className="slide1" src='/images/backgrounds/homescreen/forest.png'/>
@@ -45,10 +45,13 @@ const Background = () => {
           opacity: isForecastReceived ? 1 : 0
         }}
       >
-        {/* The reason why the opacity doesn't decrease smoothly is because when you press the back button, the source for the image gets removed. */}
-        <img className="resultsSlide" src={background} style={{
-          filter: "brightness(0.6)"
-        }}/>
+        <img 
+          className="resultsSlide" 
+          src={background} 
+          style={{
+            filter: "brightness(0.6)"
+          }}
+        />
       </div>
     </div>
   )
