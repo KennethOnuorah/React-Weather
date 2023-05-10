@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import Property from './Property/Property'
 
-import * as deg2dir from 'degrees-to-direction'
+import * as Compass from 'cardinal-direction'
 import { generateWeatherDescription } from '../../../utils/generateDescription'
 import { weatherCodes } from '../../../helpers/weatherCodes'
 import { getUVIndexCategory } from '../../../helpers/uvIndexRange'
@@ -74,7 +74,7 @@ const Now = () => {
             <Property title='Humidity' amount={getPropertyValue("relativehumidity_2m")} unitType='%' icon={<HumidIcon size={25}/>}/>
             <Property title='Precipitation' amount={getPropertyValue("precipitation_probability")} unitType='%' icon={<PrecipIcon size={25}/>}/>
             <Property title='Wind Speed' amount={forecastData.current_weather?.windspeed} unitType=' mph' icon={<WindSpeedIcon size={25}/>}/>
-            <Property title='Wind Direction' amount={deg2dir(forecastData.current_weather?.winddirection)} unitType='' icon={<WindDirIcon size={25}/>}/>
+            <Property title='Wind Direction' amount={Compass.cardinalFromDegree(forecastData.current_weather?.winddirection)} unitType='' icon={<WindDirIcon size={25}/>}/>
             <Property title='Pressure' amount={getPropertyValue("surface_pressure")} unitType=' hPa' icon={<PressureIcon size={25}/>}/>
             <Property title='Visibility' amount={Math.round(getPropertyValue("visibility") / 1069)} unitType=' mi' icon={<VisibilityIcon size={25}/>}/>
             <Property title='Dew Point' amount={Math.round(getPropertyValue("dewpoint_2m"))} unitType={`° ${temperatureUnit === "fahrenheit" ? `F` : 'C'}`} icon={<DewIcon size={35}/>}/>
