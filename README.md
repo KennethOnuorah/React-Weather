@@ -51,7 +51,7 @@ API's used:
 ## **Screenshot** 📷
 | Desktop | Mobile |
 |:---:|:---:|
-| ![readme_preview](readme_screenshot_desktop.png) | ![readme_preview](readme_screenshot_mobile.png)  |
+| ![readme_preview](readme_app_screenshot_desktop.png) | ![readme_preview](readme_app_screenshot_mobile.png)  |
 
 ## **License** 📜
 [**MIT**](https://github.com/KennethOnuorah/React-Weather/blob/master/LICENSE)
