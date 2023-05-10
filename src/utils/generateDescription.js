@@ -4,7 +4,7 @@ const coldPrepositions = ["of", "at", "as low as", "down at"]
 
 const freezingAdjectives = ["freezing", "frozen", "chilling"]
 const coldAdjectives = ["cold", "crisp"]
-const mildAdjectives = ["mild", "moderate", "cool"]
+const mildAdjectives = ["moderate", "cool"]
 const warmAdjectives = ["warm", "hot"]
 const hotAdjectives = ["very hot", "scorching"]
 

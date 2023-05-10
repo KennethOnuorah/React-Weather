@@ -13,7 +13,7 @@ A web application that reports weather and temperature forecasts based on a give
 
 Languages used: 
 
-1. JavaScript (JSX)
+1. JavaScript
 2. CSS
 
 Modules/Libraries used:
@@ -24,14 +24,16 @@ Modules/Libraries used:
 
 API's used:
 
-1. [Open-Meteo](https://open-meteo.com/)
-2. [Type.fit](https://type.fit/api/quotes)
+1. [Geocode](https://geocode.maps.co/)
+2. [Open-Meteo](https://open-meteo.com/)
+3. [Type.fit](https://type.fit/api/quotes)
 
 **Project development**: 3/29/2023 - 5/10/2023
 
 ## **Features** 📦️
 - [x] Location search bar
 - [x] Temperature unit toggling
+- [x] Dynamic backgrounds
 - [x] Current weather forecast
   * Current temperature
   * Weather type
